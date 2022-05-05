@@ -18,8 +18,12 @@ app.use(
 )
 
 
-app.get('/', (req, res) => res.json('the server is working yay !') )
+app.get('/', (req, res) => res.json('server is available') )
 app.get('/countries', db.getCountries)
+app.get('/countries/:id', db.getCountryById)
+app.post('/countries', db.createCountry)
+app.put('/countries/:id', db.updateCountry)
+app.delete('/countries/:id', db.deleteCountry)
 
 app.listen(PORT , () => {
     console.log(`listening on port ${PORT}`)
