@@ -11,9 +11,7 @@ const pool  = new Pool ({
 
 const getCountries = (req, res) => {
     pool.query('select * from countries order by id asc', (err, results) => {
-        if (err) {
-            throw err
-        }
+        if (err) throw err
         return res.status(200).json(results.rows)
     })
 }
@@ -21,9 +19,7 @@ const getCountries = (req, res) => {
 const getCountryById = (req, res) => {
     const id = parseInt(req.params.id)
     pool.query('select * from countries where id = $1', [id] , (err, results) => {
-        if (err) {
-            throw err
-        }
+        if (err) throw err
         return res.status(200).json(results.rows)
     })
 }
@@ -31,9 +27,7 @@ const getCountryById = (req, res) => {
 const createCountry = (req, res) => {
     const {name, capital} = req.body
     pool.query('insert into countries (name, capital) values($1, $2)', [name, capital] , (err, results) => {
-        if (err) {
-            throw err
-        }
+        if (err) throw err
         return res.status(200).json('new country was created')
     })
 }
@@ -42,9 +36,7 @@ const updateCountry = (req, res) => {
     const id = parseInt(req.params.id)
     const {name, capital} = req.body
     pool.query('update countries set name = $1, capital = $2 where id = $3', [name, capital, id] , (err, results) => {
-        if (err) {
-            throw err
-        }
+        if (err) throw err
         return res.status(200).json(`updated country ${id}`)
     })
 }
@@ -52,9 +44,7 @@ const updateCountry = (req, res) => {
 const deleteCountry = (req, res) => {
     const id = parseInt(req.params.id)
     pool.query('delete from countries where id = $1', [id] , (err, results) => {
-        if (err) {
-            throw err
-        }
+        if (err) throw err
         return res.status(200).json(`deleted country ${id}`)
     })
 }
